@@ -1,9 +1,9 @@
 local options = {
     ensure_installed = {
         "bash",
-        -- "c",
-        -- "cmake",
-        -- "cpp",
+        "c",
+        "cmake",
+        "cpp",
         "fish",
         -- "go",
         -- "gomod",
@@ -13,7 +13,7 @@ local options = {
         -- "haskell",
         "lua",
         "luadoc",
-        -- "make",
+        "make",
         "markdown",
         -- "odin",
         "printf",

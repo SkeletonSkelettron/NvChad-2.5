@@ -6,38 +6,33 @@ local lspconfig = require("lspconfig")
 
 -- list of all servers configured.
 lspconfig.servers = {
-    "lua_ls",
-    -- "clangd",
-    -- "gopls",
-    -- "hls",
-    -- "ols",
-    -- "pyright",
 }
 
 -- list of servers configured with default config.
-local default_servers = {
-    -- "ols",
-    -- "pyright",
-}
-
 -- lsps with default config
-for _, lsp in ipairs(default_servers) do
-    lspconfig[lsp].setup({
-        on_attach = on_attach,
-        on_init = on_init,
-        capabilities = capabilities,
-    })
-end
 
--- lspconfig.clangd.setup({
---     on_attach = function(client, bufnr)
---         client.server_capabilities.documentFormattingProvider = false
---         client.server_capabilities.documentRangeFormattingProvider = false
---         on_attach(client, bufnr)
---     end,
---     on_init = on_init,
---     capabilities = capabilities,
--- })
+lspconfig.clangd.setup({
+    on_attach = function(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+        on_attach(client, bufnr)
+    end,
+    on_init = on_init,
+    capabilities = capabilities,
+})
+
+lspconfig.angularls.setup({
+    filetypes = {
+        "typescript",
+        "html",
+        "typescriptreact",
+        "typescript.tsx",
+        "html.angular", -- sometimes used
+        "htmlangular", -- your detected filetype
+    },
+    root_dir = require("lspconfig.util").root_pattern("angular.json", "project.json", ".git"),
+})
+lspconfig.ts_ls.setup({})
 
 -- lspconfig.gopls.setup({
 --     on_attach = function(client, bufnr)
